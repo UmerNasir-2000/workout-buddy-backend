@@ -1,5 +1,19 @@
 {
-  "name": "server",
+  "name": "workout-buddy-server",
+  "author": {
+    "name": "M. Umer Nasir",
+    "email": "umer.nas@outlook.com"
+  },
+  "repository": {
+    "url": "https://github.com/UmerNasir-2000/workout-buddy-backend"
+  },
+  "keywords": [
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "Mongoose",
+    "Workouts"
+  ],
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
