@@ -1,6 +1,10 @@
 const express = require("express");
+const morgan = require("morgan");
+const workoutsRoute = require("./routes/workouts.route");
 
 const app = express();
+
+app.use(morgan("dev"));
 
 app.use(express.json());
 app.use(
@@ -12,6 +16,8 @@ app.use(
 app.get("/api/healthcheck", (req, res) =>
   res.status(200).json({ message: "API Working" })
 );
+
+app.use("/api/workouts", workoutsRoute);
 
 const { SERVER_PORT } = process.env;
 
