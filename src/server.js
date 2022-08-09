@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const workoutsRoute = require("./routes/workouts.route");
+const connectDatabase = require("./utils/connection");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/workouts", workoutsRoute);
 
 const { SERVER_PORT } = process.env;
 
-app.listen(SERVER_PORT, () =>
-  console.log(`SERVER RUNNING ON http://localhost:${SERVER_PORT}/`)
-);
+app.listen(SERVER_PORT, () => {
+  connectDatabase();
+  console.log(`SERVER RUNNING ON http://localhost:${SERVER_PORT}/`);
+});
