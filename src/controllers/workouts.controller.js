@@ -12,6 +12,7 @@ exports.fetchWorkoutById = async (req, res) => {
   const workout = await Workouts.findById(id);
 
   if (!mongoose.isValidObjectId(id))
+    // mongoose.Types.ObjectID.isValid(id)
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ error: `Invalid MongoDB Id.` });
@@ -36,11 +37,18 @@ exports.removeWorkout = async (req, res) => {
   const { id } = req.params;
   try {
     const workout = await Workouts.findByIdAndDelete(id);
+
+    if (!workout) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: "No such workout found." });
+    }
     return res
       .status(StatusCodes.OK)
       .json({ message: `DELETE /api/workouts/${id}`, workout });
   } catch (error) {
     console.log("error :>> ", error);
+    return res.status(StatusCodes.BAD_REQUEST).json({ error });
   }
 };
 
@@ -58,5 +66,6 @@ exports.updateWorkout = async (req, res) => {
       .json({ message: `PATCH /api/workouts/${id}`, workout });
   } catch (error) {
     console.log("error :>> ", error);
+    return res.status(StatusCodes.BAD_REQUEST).json({ error });
   }
 };
